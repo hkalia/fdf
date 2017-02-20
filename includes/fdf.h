@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/20 12:36:13 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/20 15:27:00 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,27 @@ typedef struct	s_ixyxy
 	int			x1;
 	int			y1;
 }				t_ixyxy;
+
+typedef struct	s_fxy
+{
+	float		x;
+	float		y;
+}				t_fxy;
+
+typedef struct	s_fxyz
+{
+	float		x;
+	float		y;
+	float		z;
+}				t_fxyz;
+
+typedef struct	s_fxyxy
+{
+	float		x0;
+	float		y0;
+	float		x1;
+	float		y1;
+}				t_fxyxy;
 
 typedef struct	s_click
 {

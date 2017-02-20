@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:16:04 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/20 12:43:42 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/20 15:26:41 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int8_t	reader(char *filename, t_mlx *mlx)
 		free(line);
 	}
 	GRD1(r == -1, perror("\e[31mERROR: gnl\e[0m\n"), -1);
+	close(fd);
 	return (0);
 }
 
