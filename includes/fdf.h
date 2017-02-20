@@ -6,12 +6,14 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/20 12:28:00 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/20 12:36:13 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+# define BUFF_SIZE 100
 
 # include <libarr.h>
 # include <libft.h>
@@ -83,6 +85,7 @@ typedef struct	s_mlx
 	t_mouse		mouse;
 }				t_mlx;
 
+int				gnl(const int fd, char **line);
 void			pixel(t_mlx *mlx, int color, t_ixy src);
 void			line(t_mlx *mlx, int color, t_ixyxy src);
 void			square(t_mlx *mlx, int color, t_ixyxy src);

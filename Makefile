@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2017/02/20 12:15:24 by hkalia           ###   ########.fr        #
+#    Updated: 2017/02/20 12:36:44 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBARR		:=	libarr/libarr.a
 LIBFT		:=	libft/libft.a
 MINILIBX	:=	minilibx/libmlx.a
 
-FILES		:=	key line main mouse pixel
+FILES		:=	key line main mouse pixel gnl
 
 SRC			:=	$(addprefix srcs/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)
