@@ -1,3 +1,6 @@
 [submodule "libarr"]
 	path = libarr
 	url = https://github.com/hkalia/libarr.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/hkalia/libft.git
