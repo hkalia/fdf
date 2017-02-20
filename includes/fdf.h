@@ -6,15 +6,16 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 11:31:23 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/20 12:28:00 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include <mlx.h>
+# include <libarr.h>
 # include <libft.h>
+# include <mlx.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -22,13 +23,6 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdint.h>
-
-# ifndef GRDS
-#  define GRD(a, b) do{if(a){return(b);}}while(0)
-#  define GRD1(a, b, c) do{if(a){b;return(c);}}while(0)
-#  define GRD2(a, b, c, d) do{if(a){b;c;return(d);}}while(0)
-#  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
-# endif
 
 typedef struct	s_ixy
 {
