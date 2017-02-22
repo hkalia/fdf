@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 16:49:38 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/21 18:55:14 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/21 20:06:19 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,17 @@ int		mouse_press(int button, int x, int y, void *param)
 	return (0);
 }
 
-static void	gfx_imgcpy(t_img _dst, t_img _src)
+static void	gfx_imgcpy(t_img dst, t_img src)
 {
-	int		*dst;
-	int		*src;
 	size_t	sze;
 	size_t	i;
 
-	dst = (int *)_dst.img;
-	src = (int *)_src.img;
-	sze = _dst.max.x * _dst.max.y;
+	sze = dst.max.x * dst.max.y;
 	i = 0;
 	while (i < sze)
 	{
-		if (src[i] != 0)
-			dst[i] = src[i];
+		if (src.img[i] != 0)
+			dst.img[i] = src.img[i];
 		++i;
 	}
 }
@@ -62,25 +58,19 @@ int		mouse_release(int button, int x, int y, void *param)
 	return (0);
 }
 
-static void	gfx_imgmerge(t_img _dst, t_img _src1, t_img _src2)
+static void	gfx_imgmerge(t_img dst, t_img src1, t_img src2)
 {
-	int		*dst;
-	int		*src1;
-	int		*src2;
 	size_t	sze;
 	size_t	i;
 
-	dst = (int *)_dst.img;
-	src1 = (int *)_src1.img;
-	src2 = (int *)_src2.img;
-	sze = _dst.max.x * _dst.max.y;
+	sze = dst.max.x * dst.max.y;
 	i = 0;
 	while (i < sze)
 	{
-		if (src1[i] != 0)
-			dst[i] = src1[i];
-		else if (src2[i] != 0)
-			dst[i] = src2[i];
+		if (src1.img[i] != 0)
+			dst.img[i] = src1.img[i];
+		else if (src2.img[i] != 0)
+			dst.img[i] = src2.img[i];
 		++i;
 	}
 }

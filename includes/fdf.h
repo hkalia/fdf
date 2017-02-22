@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/21 18:30:19 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/21 20:01:33 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ typedef struct	s_mouse
 typedef struct	s_img
 {
 	void		*id;
-	char		*img;
-	int			bpp;
+	int			*img;
 	int			ln;
-	int			end;
 	t_ixy		max;
 }				t_img;
 

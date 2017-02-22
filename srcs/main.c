@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:16:04 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/21 18:36:17 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/21 20:03:31 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 t_img	gfx_imgnew(void *mlx_id, t_ixy sze)
 {
 	t_img	ret;
+	int		tmp;
+	int		tmp1;
 
-	ret = (t_img){0, 0, 0, 0, 0, {0, 0}};
-	if ((ret.id = mlx_new_image(mlx_id, sze.x, sze.y)) == 0)
-	{
-		perror("\e[31mERROR: mlx_new_image\e[0m\n");
-		return (ret);
-	}
-	ret.img = mlx_get_data_addr(ret.id, &ret.bpp, &ret.ln, &ret.end);
-	ret.bpp /= 8;
+	ret = (t_img){0, 0, 0, {0, 0}};
+	GRD1((ret.id = mlx_new_image(mlx_id, sze.x, sze.y)) == 0
+		, perror("\e[31mERROR: mlx_new_image\e[0m\n"), ret);
+	ret.img = (int *)mlx_get_data_addr(ret.id, &tmp, &ret.ln, &tmp1);
+	ret.ln /= 4;
 	ret.max = sze;
 	return (ret);
 }

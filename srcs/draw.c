@@ -6,31 +6,17 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:16:04 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/21 18:25:01 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/21 20:01:26 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-static uint32_t	endian_change(uint32_t value)
-{
-	uint32_t	result = 0;
-
-	result |= (value & 0x000000FF) << 24;
-	result |= (value & 0x0000FF00) << 8;
-	result |= (value & 0x00FF0000) >> 8;
-	result |= (value & 0xFF000000) >> 24;
-	return (result);
-}
-
 void			pixel(t_img img, int color, t_ixy src)
 {
-	int	*i;
-
 	if (src.x >= img.max.x || src.y >= img.max.y || src.x < 0 || src.y < 0)
 		return ;
-	i = (int *)&img.img[src.x * img.bpp + src.y * img.ln];
-	*i = img.end ? endian_change(color) : color;
+	img.img[src.x + src.y * img.ln] = color;
 }
 
 void		line(t_img img, int color, t_ixyxy src)
