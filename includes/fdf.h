@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/20 15:27:00 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/21 18:30:19 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,6 @@ typedef struct	s_fxyz
 	float		z;
 }				t_fxyz;
 
-typedef struct	s_fxyxy
-{
-	float		x0;
-	float		y0;
-	float		x1;
-	float		y1;
-}				t_fxyxy;
-
 typedef struct	s_click
 {
 	int			btn;
@@ -89,6 +81,7 @@ typedef struct	s_img
 	int			bpp;
 	int			ln;
 	int			end;
+	t_ixy		max;
 }				t_img;
 
 typedef struct	s_win
@@ -102,14 +95,16 @@ typedef struct	s_mlx
 	void		*id;
 	t_arr		src;
 	t_win		win;
+	t_img		cur;
 	t_img		img;
 	t_mouse		mouse;
 }				t_mlx;
 
 int				gnl(const int fd, char **line);
-void			pixel(t_mlx *mlx, int color, t_ixy src);
-void			line(t_mlx *mlx, int color, t_ixyxy src);
-void			square(t_mlx *mlx, int color, t_ixyxy src);
+t_img			gfx_imgnew(void *mlx_id, t_ixy sze);
+void			pixel(t_img img, int color, t_ixy src);
+void			line(t_img img, int color, t_ixyxy src);
+void			square(t_img img, int color, t_ixyxy src);
 int				key_press(int keycode, void *param);
 int				key_release(int keycode, void *param);
 int				mouse_press(int button, int x, int y, void *param);

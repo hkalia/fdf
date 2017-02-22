@@ -6,19 +6,26 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:16:04 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/20 15:26:41 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/21 18:36:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
-#include <strings.h>
 
-void			square(t_mlx *mlx, int color, t_ixyxy src)
+t_img	gfx_imgnew(void *mlx_id, t_ixy sze)
 {
-	line(mlx, color, (t_ixyxy){src.x0, src.y0, src.x1, src.y0});
-	line(mlx, color, (t_ixyxy){src.x1, src.y0, src.x1, src.y1});
-	line(mlx, color, (t_ixyxy){src.x1, src.y1, src.x0, src.y1});
-	line(mlx, color, (t_ixyxy){src.x0, src.y1, src.x0, src.y0});
+	t_img	ret;
+
+	ret = (t_img){0, 0, 0, 0, 0, {0, 0}};
+	if ((ret.id = mlx_new_image(mlx_id, sze.x, sze.y)) == 0)
+	{
+		perror("\e[31mERROR: mlx_new_image\e[0m\n");
+		return (ret);
+	}
+	ret.img = mlx_get_data_addr(ret.id, &ret.bpp, &ret.ln, &ret.end);
+	ret.bpp /= 8;
+	ret.max = sze;
+	return (ret);
 }
 
 static int8_t	mlx_start(t_mlx *mlx)
@@ -28,11 +35,10 @@ static int8_t	mlx_start(t_mlx *mlx)
 	mlx->win.max.y = 480;
 	GRD1(!(mlx->win.id = mlx_new_window(mlx->id, mlx->win.max.x, mlx->win.max.y
 		, "42")), perror("\e[31mERROR: mlx_new_window\e[0m\n"), -1);
-	GRD1((mlx->img.id = mlx_new_image(mlx->id, mlx->win.max.x, mlx->win.max.y))
-		== 0, perror("\e[31mERROR: mlx_new_image\e[0m\n"), -1);
-	mlx->img.img = mlx_get_data_addr(mlx->img.id, &mlx->img.bpp, &mlx->img.ln
-									, &mlx->img.end);
-	mlx->img.bpp /= 8;
+	mlx->img = gfx_imgnew(mlx->id, (t_ixy){mlx->win.max.x, mlx->win.max.y});
+	GRD1(mlx->img.id == 0, perror("\e[31mERROR: gfx_imgnew\e[0m\n"), -1);
+	mlx->cur = gfx_imgnew(mlx->id, (t_ixy){mlx->win.max.x, mlx->win.max.y});
+	GRD1(mlx->cur.id == 0, perror("\e[31mERROR: gfx_imgnew\e[0m\n"), -1);
 	return (0);
 }
 
@@ -61,7 +67,8 @@ int				main(int ac, char **av)
 {
 	t_mlx	mlx;
 
-	GRD1(ac != 2, printf("Usage : %s <filename> [ case_size z_size ]", av[0]), -1);
+	GRD1(ac != 2, printf("Usage : %s <filename> [ case_size z_size ]", av[0])
+		, -1);
 	ft_bzero(&mlx, sizeof(mlx));
 	GRD1(reader(av[1], &mlx) == -1, perror("\e[31mERROR: reader\e[0m\n"), -1);
 	GRD(mlx_start(&mlx) == -1, -1);
