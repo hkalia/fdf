@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 16:49:38 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/21 20:06:19 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/21 20:26:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		mouse_release(int button, int x, int y, void *param)
 	GRD(x >= mlx->win.max.x || y >= mlx->win.max.y || x < 0 || y < 0, 0);
 	printf("\e[34mMouse Release: Button:%d X:%d Y:%d\e[0m\n", button, x, y);
 	gfx_imgcpy(mlx->img, mlx->cur);
-	ft_bzero(mlx->cur.img, mlx->cur.max.x * mlx->cur.max.y * 4);
 	mlx_put_image_to_window(mlx->id, mlx->win.id, mlx->img.id, 0, 0);
 	mlx->mouse.flg = 0;
 	mlx->mouse.r.btn = button;
