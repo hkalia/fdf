@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/21 20:01:33 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/25 21:00:03 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ typedef struct	s_fxyz
 	float		y;
 	float		z;
 }				t_fxyz;
+
+typedef struct	s_vertex
+{
+	t_fxyz		*local;
+	t_fxyz		*world;
+	t_fxyz		*aligned;
+	t_fxyz		*projected;
+	int			color;
+}				t_vertex;
+
 
 typedef struct	s_click
 {

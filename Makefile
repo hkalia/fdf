@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2017/02/21 20:13:47 by hkalia           ###   ########.fr        #
+#    Updated: 2017/02/25 21:00:58 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,10 +75,3 @@ fclean: clean
 	@printf "\e[32m[DONE]\e[0m\n"
 
 re: fclean all
-
-test: re
-	@make -C libarr clean
-	@make -C libft clean
-	@printf "\e[31mDeleting object files... \e[0m"
-	@rm -f $(OBJ)
-	@printf "\e[32m[DONE]\e[0m\n"
