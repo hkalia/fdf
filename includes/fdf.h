@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/25 21:41:20 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/26 20:24:00 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,27 +70,11 @@ typedef struct	s_fxyz
 
 typedef struct	s_vertex
 {
-	t_fxyz		*local;
-	t_fxyz		*world;
-	t_fxyz		*aligned;
-	t_fxyz		*projected;
-	int			color;
+	t_fxyz		local;
+	t_fxyz		world;
+	t_fxyz		aligned;
+	t_fxyz		projected;
 }				t_vertex;
-
-
-typedef struct	s_click
-{
-	int			btn;
-	t_ixy		pos;
-}				t_click;
-
-typedef struct	s_mouse
-{
-	bool		flg;
-	t_click		p;
-	t_click		r;
-	t_ixy		pos;
-}				t_mouse;
 
 typedef struct	s_img
 {
@@ -106,25 +90,36 @@ typedef struct	s_win
 	t_ixy		max;
 }				t_win;
 
+typedef struct	s_scene
+{
+	t_vertex	**points;
+	t_fxyz		world;
+	float		scale;
+	t_fxyz		scales;
+	t_fxyz		trans;
+	short		focal_dist;
+}				t_scene;
+
 typedef struct	s_mlx
 {
 	void		*id;
 	t_arr		src;
 	t_win		win;
-	t_img		cur;
+	t_scene		scene;
 	t_img		img;
-	t_mouse		mouse;
 }				t_mlx;
 
-int				gnl(const int fd, char **line);
-t_img			gfx_imgnew(void *mlx_id, t_ixy sze);
+t_img			imgnew(void *mlx_id, t_ixy sze);
 void			pixel(t_img img, int color, t_ixy src);
 void			line(t_img img, int color, t_ixyxy src);
 void			square(t_img img, int color, t_ixyxy src);
-int				key_press(int keycode, void *param);
-int				key_release(int keycode, void *param);
-int				mouse_press(int button, int x, int y, void *param);
-int				mouse_release(int button, int x, int y, void *param);
-int				mouse_motion(int x, int y, void *param);
+int				key_press_hook(int keycode, t_mlx *mlx);
+int				exit_hook(t_mlx *mlx);
+void			mat_mult(float dst[4][4], float src1[4][4], float src2[4][4]);
+void			mat_id(float src[4][4]);
+void			mat_translate(float dst[4][4], t_fxyz src);
+void			mat_scale(float dst[4][4], t_fxyz src);
+void			mat_rotate(float dst[4][4], t_fxyz src);
+void			vec_mat_mult(t_fxyz *dst, t_fxyz *src1, float src2[4][4]);
 
 #endif

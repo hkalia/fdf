@@ -6,13 +6,13 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:16:04 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/25 21:41:25 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/26 20:24:08 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-t_img	gfx_imgnew(void *mlx_id, t_ixy sze)
+t_img			imgnew(void *mlx_id, t_ixy sze)
 {
 	t_img	ret;
 	int		tmp;
@@ -34,10 +34,8 @@ static int8_t	mlx_start(t_mlx *mlx)
 	mlx->win.max.y = WIN_Y;
 	GRD1(!(mlx->win.id = mlx_new_window(mlx->id, mlx->win.max.x, mlx->win.max.y
 		, "42")), perror("\e[31mERROR: mlx_new_window\e[0m\n"), -1);
-	mlx->img = gfx_imgnew(mlx->id, (t_ixy){mlx->win.max.x, mlx->win.max.y});
-	GRD1(mlx->img.id == 0, perror("\e[31mERROR: gfx_imgnew\e[0m\n"), -1);
-	mlx->cur = gfx_imgnew(mlx->id, (t_ixy){mlx->win.max.x, mlx->win.max.y});
-	GRD1(mlx->cur.id == 0, perror("\e[31mERROR: gfx_imgnew\e[0m\n"), -1);
+	mlx->img = imgnew(mlx->id, (t_ixy){mlx->win.max.x, mlx->win.max.y});
+	GRD1(mlx->img.id == 0, perror("\e[31mERROR: imgnew\e[0m\n"), -1);
 	return (0);
 }
 
@@ -45,19 +43,20 @@ static int8_t	reader(char *filename, t_mlx *mlx)
 {
 	int		fd;
 	int		r;
-	char	*line;
+	char	buf[BUFF_SIZE];
 
-	GRD1((fd = open(filename, O_RDONLY)) == -1
-		, perror("\e[31mERROR: open\e[0m\n"), -1);
-	GRD1(arr_init(&mlx->src, 100, (t_arr_elm){sizeof(char), 0, 0, 0}) == -1
-		, perror("\e[31mERROR: arr_init\e[0m\n"), -1);
-	while ((r = gnl(fd, &line)) == 1)
+	GRD1(BUFF_SIZE == 0, perror("\e[31mERROR: BUFF_SIZE\e[0m\n"), -1);
+	GRD1((fd = open(filename, O_RDONLY)) < 0, perror("\e[31mERROR: open\e[0m\n")
+		, -1);
+	GRD1(arr_init(&mlx->src, BUFF_SIZE, (t_arr_elm){sizeof(char), 0, 0
+		, 0}) == -1, perror("\e[31mERROR: arr_init\e[0m\n"), -1);
+	while ((r = read(fd, buf, BUFF_SIZE)) != 0)
 	{
-		GRD1(arr_appendm(&mlx->src, line, ft_strlen(line)) == -1
-			, perror("\e[31mERROR: arr_insertat\e[0m\n"), -1);
-		free(line);
+		GRD2(r == -1, arr_dtr(&mlx->src), perror("\e[31mERROR: read\e[0m\n")
+			, -1);
+		GRD2(arr_appendm(&mlx->src, buf, r) == -1, arr_dtr(&mlx->src)
+			, perror("\e[31mERROR: arr_appendm\e[0m\n"), -1);
 	}
-	GRD1(r == -1, perror("\e[31mERROR: gnl\e[0m\n"), -1);
 	close(fd);
 	return (0);
 }
@@ -71,11 +70,8 @@ int				main(int ac, char **av)
 	ft_bzero(&mlx, sizeof(mlx));
 	GRD1(reader(av[1], &mlx) == -1, perror("\e[31mERROR: reader\e[0m\n"), -1);
 	GRD(mlx_start(&mlx) == -1, -1);
-	mlx_hook(mlx.win.id, 2, 0, key_press, &mlx);
-	mlx_hook(mlx.win.id, 3, 0, key_release, &mlx);
-	mlx_hook(mlx.win.id, 4, 0, mouse_press, &mlx);
-	mlx_hook(mlx.win.id, 5, 0, mouse_release, &mlx);
-	mlx_hook(mlx.win.id, 6, 0, mouse_motion, &mlx);
+	mlx_hook(mlx.win.id, 2, 0, key_press_hook, &mlx);
+	mlx_hook(mlx.win.id, 17, 0, exit_hook, &mlx);
 	mlx_loop(mlx.id);
 	return (0);
 }
