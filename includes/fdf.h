@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/25 21:00:03 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/25 21:41:20 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FDF_H
 
 # define BUFF_SIZE 100
+# define WIN_X 640
+# define WIN_Y 480
 
 # include <libarr.h>
 # include <libft.h>
@@ -25,6 +27,12 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdint.h>
+
+typedef struct	s_sxy
+{
+	short		x;
+	short		y;
+}				t_sxy;
 
 typedef struct	s_ixy
 {

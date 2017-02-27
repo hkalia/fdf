@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:16:04 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/21 20:03:31 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/25 21:41:25 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_img	gfx_imgnew(void *mlx_id, t_ixy sze)
 static int8_t	mlx_start(t_mlx *mlx)
 {
 	GRD1(!(mlx->id = mlx_init()), perror("\e[31mERROR: mlx_init\e[0m\n"), -1);
-	mlx->win.max.x = 640;
-	mlx->win.max.y = 480;
+	mlx->win.max.x = WIN_X;
+	mlx->win.max.y = WIN_Y;
 	GRD1(!(mlx->win.id = mlx_new_window(mlx->id, mlx->win.max.x, mlx->win.max.y
 		, "42")), perror("\e[31mERROR: mlx_new_window\e[0m\n"), -1);
 	mlx->img = gfx_imgnew(mlx->id, (t_ixy){mlx->win.max.x, mlx->win.max.y});
