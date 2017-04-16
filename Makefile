@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2017/02/25 21:00:58 by hkalia           ###   ########.fr        #
+#    Updated: 2017/04/16 16:02:10 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,14 @@ CFLAGS		+=	-Wall -Wextra
 CFLAGS		+=	-Werror
 CFLAGS		+=	-I includes -I libarr/includes -I libft/includes -I minilibx
 ifdef ALLOCWRAP
-	LDFLAGS	+=	$(HOME)/lib/alloc_wrap.c -ldl
+	LDFLAGS	+=	$(HOME)/Coding/lib/alloc_wrap.c -ldl
 endif
 LDFLAGS		+=	-L libarr -larr -L libft/ -lft -L minilibx -lmlx -framework OpenGL -framework AppKit
 LIBARR		:=	libarr/libarr.a
 LIBFT		:=	libft/libft.a
 MINILIBX	:=	minilibx/libmlx.a
 
-FILES		:=	draw gnl key main mouse
+FILES		:=	draw hooks main matrix vector
 
 SRC			:=	$(addprefix srcs/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/26 20:24:00 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/04/16 16:09:56 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,6 @@ typedef struct	s_img
 	t_ixy		max;
 }				t_img;
 
-typedef struct	s_win
-{
-	void		*id;
-	t_ixy		max;
-}				t_win;
-
 typedef struct	s_scene
 {
 	t_vertex	**points;
@@ -99,6 +93,12 @@ typedef struct	s_scene
 	t_fxyz		trans;
 	short		focal_dist;
 }				t_scene;
+
+typedef struct	s_win
+{
+	void		*id;
+	t_ixy		max;
+}				t_win;
 
 typedef struct	s_mlx
 {
